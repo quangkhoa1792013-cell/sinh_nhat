@@ -6,7 +6,7 @@ import threading
 
 # Configuration
 WEB_URL = "http://localhost:5173"  # Change this to your actual hosted URL later
-INITIAL_CHALLENGE_ANSWER = "căn tin" # Example: Where we first met
+INITIAL_CHALLENGE_ANSWER = "17/9/2013" # Example: Where we first met
 SECRET_WEB_KEY = "SANG-XIN-MIN-2026"
 FINAL_SECRET_CODE = "QUA-MUON-NHUNG-CHAT"
 
@@ -17,16 +17,16 @@ class BirthdayGuardian:
         self.root.geometry("500x700")
         self.root.configure(bg="#f0f8f0") # Mint green background
         
-        self.custom_font = font.Font(family="Segoe UI", size=12)
-        self.title_font = font.Font(family="Segoe UI", size=18, weight="bold")
+        self.custom_font = font.Font(family="Arial", size=14)
+        self.title_font = font.Font(family="Arial", size=20, weight="bold")
         
         self.setup_ui()
 
     def setup_ui(self):
         # Title
         self.label_title = tk.Label(
-            self.root, text="🎓 NGƯỜI GÁC CỔNG KHÁC LỚP 🎓", 
-            fg="#2d8659", bg="#f0f8f0", font=self.title_font, pady=20
+            self.root, text="🎓 NGƯỜI GÁC CỔNG 🎓", 
+            fg="#000000", bg="#f0f8f0", font=self.title_font, pady=20
         )
         self.label_title.pack()
 
@@ -35,16 +35,16 @@ class BirthdayGuardian:
         self.phase1_frame.pack(pady=20)
 
         tk.Label(
-            self.phase1_frame, text="Thử thách đầu tiên:\nTụi mình quen nhau ở đâu?",
-            fg="#2d8659", bg="#f0f8f0", font=self.custom_font, justify="center"
+            self.phase1_frame, text="Thử thách đầu tiên:\nNgày sinh nhật của t là ngày nào (dd/mm/yyyy)?",
+            fg="#000000", bg="#f0f8f0", font=self.custom_font, justify="center"
         ).pack(pady=10)
 
-        self.entry_ans = tk.Entry(self.phase1_frame, font=self.custom_font, justify="center", width=15)
+        self.entry_ans = tk.Entry(self.phase1_frame, font=self.custom_font, justify="center", width=20, bg="white", fg="black")
         self.entry_ans.pack(pady=10)
 
         self.btn_unlock = tk.Button(
-            self.phase1_frame, text="Giải mã", command=self.check_initial_challenge,
-            bg="#ffb7c5", fg="#1a1a1a", font=self.custom_font, relief="flat", padx=20
+            self.phase1_frame, text="Trả lời", command=self.check_initial_challenge,
+            bg="#2d8659", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2
         )
         self.btn_unlock.pack(pady=10)
 
@@ -53,13 +53,13 @@ class BirthdayGuardian:
         
         self.label_key = tk.Label(
             self.result_frame, text=f"KEY VÀO WEB: {SECRET_WEB_KEY}",
-            fg="#2d8659", bg="#f0f8f0", font=self.custom_font, pady=10
+            fg="#000000", bg="#f0f8f0", font=self.custom_font, pady=10
         )
         self.label_key.pack()
 
         self.btn_go_web = tk.Button(
             self.result_frame, text="Mở Web Ngay!", command=self.open_web,
-            bg="#98FF98", fg="#2d8659", font=self.custom_font, relief="flat", padx=20
+            bg="#2d8659", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2
         )
         self.btn_go_web.pack(pady=10)
 
@@ -67,15 +67,15 @@ class BirthdayGuardian:
         self.final_frame = tk.Frame(self.root, bg="#f0f8f0")
         tk.Label(
             self.final_frame, text="----------------------------------\nSau khi chơi xong 4 game trên web,\nhãy nhập Mã Bí Mật vào đây nhé:",
-            fg="#2d8659", bg="#f0f8f0", font=("Segoe UI", 10)
+            fg="#000000", bg="#f0f8f0", font=self.custom_font
         ).pack(pady=20)
 
-        self.entry_final = tk.Entry(self.final_frame, font=self.custom_font, justify="center", width=20)
+        self.entry_final = tk.Entry(self.final_frame, font=self.custom_font, justify="center", width=25, bg="white", fg="black")
         self.entry_final.pack(pady=10)
 
         self.btn_final = tk.Button(
             self.final_frame, text="Nhận Quà Thật Sự", command=self.check_final_code,
-            bg="#FFB7C5", fg="#2d8659", font=self.custom_font, relief="flat", padx=20
+            bg="#FFB7C5", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2
         )
         self.btn_final.pack(pady=10)
 
@@ -102,33 +102,47 @@ class BirthdayGuardian:
             widget.destroy()
         
         # Create canvas for confetti
-        self.canvas = tk.Canvas(self.root, width=500, height=600, bg="#f0f8f0", highlightthickness=0)
+        self.canvas = tk.Canvas(self.root, width=600, height=700, bg="#f0f8f0", highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
         
         # Start confetti animation
         threading.Thread(target=self.create_confetti, daemon=True).start()
         
         # Finale Screen
-        self.canvas.create_text(250, 100, text="HAPPY BIRTHDAY! 🎉", 
-                               fill="#2d8659", font=("Segoe UI", 24, "bold"), tags="finale")
+        self.canvas.create_text(300, 100, text="HAPPY BIRTHDAY! 🎉", 
+                               fill="#000000", font=("Arial", 28, "bold"), tags="finale")
 
         message = (
-            "Chúc mừng sinh nhật (Tên bạn)! 🎉\n\n"
-            "1/4 nên nãy giờ có mấy cái đùa vui thôi, còn đây là thật lòng nè:\n"
-            "Chúc bạn tuổi mới lúc nào cũng rạng rỡ, học hành siêu đỉnh và ngày càng xinh gái.\n"
-            "Xin lỗi vì món quà này đến hơi muộn (và cái cách nhận quà cũng hơi cồng kềnh tí).\n"
-            "Chai sữa tắm với tẩy trang kia là để bạn chăm sóc bản thân tốt hơn đó.\n"
-            "Tuy tui có hơi thô sơ, chỉ biết dùng code để gửi lời chúc, nhưng đây là cả tâm huyết của tui dành cho bạn.\n"
-            "Mãi là bạn tốt nhé! ❤️"
+            "Chúc mừng sinh nhật bạn! 🎉\n\n"
+            "Biết là hôm nay 4/4 rồi, quà đến hơi muộn nên đừng giận tui nhé.\n"
+            "Nãy giờ đùa Cá tháng Tư tí thôi, còn đây là những dòng thật lòng nhất:\n\n"
+            "Dù bây giờ mỗi đứa một lớp, không còn học chung như hồi năm lớp 5 nữa,\n"
+            "nhưng tui vẫn luôn trân trọng tình bạn này.\n\n"
+            "Món quà ngoài đời nhìn có vẻ đơn giản, thô sơ\n"
+            "(vì tui vụng về khoản gói ghém quá),\n"
+            "nhưng hy vọng chai sữa tắm với tẩy trang này\n"
+            "sẽ thay tui nhắc bạn chăm sóc bản thân thật tốt.\n\n"
+            "Tui không giỏi nói lời hoa mỹ,\n"
+            "chỉ biết dùng code để gửi tâm tư,\n"
+            "nhưng tình cảm dành cho bạn thì luôn là\n"
+            "'hàng thật giá thật'.\n\n"
+            "Tuổi mới lúc nào cũng rạng rỡ,\n"
+            "học siêu đỉnh và mãi xinh gái nhé! ❤️"
         )
         
-        self.canvas.create_text(250, 300, text=message, fill="#2d8659", 
-                               font=("Segoe UI", 12), justify="center", tags="finale")
+        # Hiển thị message theo từng dòng để không bị che
+        lines = message.split('\n')
+        y_pos = 180
+        for line in lines:
+            if line.strip():  # Chỉ hiển thị dòng không rỗng
+                self.canvas.create_text(300, y_pos, text=line.strip(), 
+                                       fill="#000000", font=("Arial", 12), tags="finale")
+                y_pos += 25
 
         # Exit button
         exit_btn = tk.Button(self.root, text="🎓 Mãi Là Bạn Tốt 🎓", command=self.root.quit,
-                           bg="#FFB7C5", fg="#2d8659", font=self.custom_font, relief="flat", padx=20)
-        self.canvas.create_window(250, 500, window=exit_btn, tags="finale")
+                           bg="#2d8659", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2)
+        self.canvas.create_window(300, 600, window=exit_btn, tags="finale")
 
     def create_confetti(self):
         colors = ["#98FF98", "#FFB7C5", "#2d8659", "#f0f8f0", "#e6b3cc"]
@@ -152,7 +166,7 @@ class BirthdayGuardian:
                 piece['y'] += piece['speed']
                 
                 # Reset if out of bounds
-                if piece['y'] > 600:
+                if piece['y'] > 700:
                     self.canvas.coords(piece['id'], piece['x'], -50, 
                                      piece['x'] + 10, -50 + 10)
                     piece['y'] = -50
