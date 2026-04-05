@@ -75,7 +75,7 @@ const App = () => {
       <div className={`bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl transform transition-all duration-1000 border-2 border-green-300 ${
         isAuthenticated ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
       }`}>
-        <h1 className="text-4xl font-bold text-green-800 text-center mb-8">� Người Gác Cổng Khác Lớp �</h1>
+        <h1 className="text-4xl font-bold text-green-800 text-center mb-8">� Người Gác Cổng �</h1>
         <p className="text-green-700 text-center mb-6">Nhập khóa bí mật để bắt đầu hành trình</p>
         <GatekeeperForm onSuccess={handleAuthentication} />
       </div>
