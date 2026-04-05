@@ -13,7 +13,7 @@ FINAL_SECRET_CODE = "QUA-MUON-NHUNG-CHAT"
 class BirthdayGuardian:
     def __init__(self, root):
         self.root = root
-        self.root.title("Người Gác Cổng Khác Lớp")
+        self.root.title("Người Gác Cổng")
         self.root.geometry("500x700")
         self.root.configure(bg="#f0f8f0") # Mint green background
         
@@ -114,7 +114,7 @@ class BirthdayGuardian:
 
         message = (
             "Chúc mừng sinh nhật bạn! 🎉\n\n"
-            "Biết là hôm nay 4/4 rồi, quà đến hơi muộn nên đừng giận tui nhé.\n"
+            "Biết là hôm nay 5/4 rồi, quà đến hơi muộn nên đừng giận tui nhé.\n"
             "Nãy giờ đùa Cá tháng Tư tí thôi, còn đây là những dòng thật lòng nhất:\n\n"
             "Dù bây giờ mỗi đứa một lớp, không còn học chung như hồi năm lớp 5 nữa,\n"
             "nhưng tui vẫn luôn trân trọng tình bạn này.\n\n"
