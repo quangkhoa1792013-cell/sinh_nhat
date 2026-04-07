@@ -5,7 +5,7 @@ import random
 import threading
 
 # Configuration
-WEB_URL = "http://localhost:5173" 
+WEB_URL = "https://sinh-nhat.pages.dev" 
 GIFTED_KEY = "KTLT-2013" 
 INITIAL_CHALLENGE_ANSWER = "17/9/2013" 
 SECRET_WEB_KEY = "SANG-XIN-MIN-2026"
