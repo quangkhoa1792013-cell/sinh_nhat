@@ -1,111 +1,83 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import "tailwindcss";
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@theme {
+  /* Định nghĩa bảng màu Mint */
+  --color-mint-50: #f0fff4;
+  --color-mint-100: #c6f6d5;
+  --color-mint-200: #9ae6b4;
+  --color-mint-300: #68d391;
+  --color-mint-400: #48bb78;
+  --color-mint-500: #38a169;
+  --color-mint-600: #2f855a;
+  --color-mint-700: #276749;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* Định nghĩa bảng màu Soft Pink */
+  --color-softpink-50: #fff5f7;
+  --color-softpink-100: #fed7e2;
+  --color-softpink-200: #fbb6ce;
+  --color-softpink-300: #f687b3;
+  --color-softpink-400: #ed64a1;
+  --color-softpink-500: #d53f8c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+:root {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: light;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  background-color: #f0f8f0;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+/* 3D Flip Card Effect */
+.preserve-3d {
+  transform-style: preserve-3d;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+.backface-hidden {
+  backface-visibility: hidden;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Custom Buttons & Containers */
+@layer utilities {
+  .btn-primary {
+    @apply px-6 py-2 bg-mint-400 hover:bg-mint-500 text-slate-900 font-bold rounded-xl transition-all transform hover:scale-105 active:scale-95 shadow-lg cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2 bg-softpink-400 hover:bg-softpink-500 text-white font-bold rounded-xl transition-all transform hover:scale-105 active:scale-95 shadow-lg cursor-pointer;
+  }
+
+  .game-container {
+    @apply bg-white/70 backdrop-blur-md rounded-3xl border-2 border-mint-100 shadow-xl overflow-hidden;
   }
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+
+/* Background Stars Animation */
+.stars-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle var(--duration) infinite;
 }

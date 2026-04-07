@@ -5,175 +5,191 @@ import random
 import threading
 
 # Configuration
-WEB_URL = "http://localhost:5173"  # Change this to your actual hosted URL later
-INITIAL_CHALLENGE_ANSWER = "17/9/2013" # Example: Where we first met
+WEB_URL = "http://localhost:5173" 
+GIFTED_KEY = "KTLT-2013" 
+INITIAL_CHALLENGE_ANSWER = "17/9/2013" 
 SECRET_WEB_KEY = "SANG-XIN-MIN-2026"
-FINAL_SECRET_CODE = "QUA-MUON-NHUNG-CHAT"
+FINAL_SECRET_CODE = "CAM-ON-DA-NHAN-QUA-:)"
+
+MESSAGES = [
+    "Chúc mừng sinh nhật! 🎉\n\nBiết là hôm nay là 7/4 rồi, quà đến muộn mất 1 tuần nên đừng giận t nhé.\nNãy giờ đùa vui tí thôi, gọi là chơi giải trí tí, còn đây là những dòng thật lòng nhất t muốn dành cho m:",
+    "Dù bây giờ m không còn nghịch như xưa nữa mà đã trưởng thành hơn, đã xinh đẹp hơn, đã thêm 1 tuổi rồi \nnhưng t vẫn luôn trân trọng tình bạn này.\n\nMón quà ngoài đời nhìn có vẻ đơn giản, thô sơ\n(vì t không biết gói ghém quà :) ),",
+    "Nhưng t hy vọng 1 chai sữa tắm và 1 chai tẩy trang này\nsẽ thay t nhắc m chăm sóc bản thân thật tốt.\n\nt không giỏi nói lời hoa mỹ, chỉ biết dùng code để gửi tâm tư :),\nnhưng món quà t dành cho m thì luôn là 'hàng thật giá thật'.",
+    "T chúc m: Tuổi mới lúc nào cũng rạng rỡ,\nhọc siêu đỉnh và mãi xinh gái nhé! ❤️ (ok thì nhắn t :) )"
+]
 
 class BirthdayGuardian:
     def __init__(self, root):
         self.root = root
         self.root.title("Người Gác Cổng")
-        self.root.geometry("500x700")
-        self.root.configure(bg="#f0f8f0") # Mint green background
+        self.root.geometry("500x600")
+        self.root.resizable(False, False)
+        self.root.configure(bg="#f0f8f0") 
         
-        self.custom_font = font.Font(family="Arial", size=14)
-        self.title_font = font.Font(family="Arial", size=20, weight="bold")
+        self.custom_font = font.Font(family="Arial", size=13)
+        self.title_font = font.Font(family="Arial", size=18, weight="bold")
+        self.msg_index = 0
         
         self.setup_ui()
 
     def setup_ui(self):
-        # Title
-        self.label_title = tk.Label(
+        # Header
+        self.header_label = tk.Label(
             self.root, text="🎓 NGƯỜI GÁC CỔNG 🎓", 
-            fg="#000000", bg="#f0f8f0", font=self.title_font, pady=20
+            fg="#2d8659", bg="#f0f8f0", font=self.title_font, pady=30
         )
-        self.label_title.pack()
+        self.header_label.pack()
 
-        # Phase 1 Container
-        self.phase1_frame = tk.Frame(self.root, bg="#f0f8f0")
-        self.phase1_frame.pack(pady=20)
+        # Main Container
+        self.main_frame = tk.Frame(self.root, bg="#f0f8f0")
+        self.main_frame.pack(pady=10, fill="both", expand=True)
 
-        tk.Label(
-            self.phase1_frame, text="Thử thách đầu tiên:\nNgày sinh nhật của t là ngày nào (dd/mm/yyyy)?",
-            fg="#000000", bg="#f0f8f0", font=self.custom_font, justify="center"
-        ).pack(pady=10)
+        self.show_login_gate()
 
-        self.entry_ans = tk.Entry(self.phase1_frame, font=self.custom_font, justify="center", width=20, bg="white", fg="black")
-        self.entry_ans.pack(pady=10)
+    def clear_main_frame(self):
+        for widget in self.main_frame.winfo_children():
+            widget.destroy()
 
-        self.btn_unlock = tk.Button(
-            self.phase1_frame, text="Trả lời", command=self.check_initial_challenge,
-            bg="#2d8659", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2
-        )
-        self.btn_unlock.pack(pady=10)
-
-        # Hidden Result Frame
-        self.result_frame = tk.Frame(self.root, bg="#f0f8f0")
+    def show_login_gate(self):
+        self.clear_main_frame()
         
-        self.label_key = tk.Label(
-            self.result_frame, text=f"KEY VÀO WEB: {SECRET_WEB_KEY}",
-            fg="#000000", bg="#f0f8f0", font=self.custom_font, pady=10
-        )
-        self.label_key.pack()
-
-        self.btn_go_web = tk.Button(
-            self.result_frame, text="Mở Web Ngay!", command=self.open_web,
-            bg="#2d8659", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2
-        )
-        self.btn_go_web.pack(pady=10)
-
-        # Phase 2: Final Gateway (Hidden initially)
-        self.final_frame = tk.Frame(self.root, bg="#f0f8f0")
         tk.Label(
-            self.final_frame, text="----------------------------------\nSau khi chơi xong 4 game trên web,\nhãy nhập Mã Bí Mật vào đây nhé:",
-            fg="#000000", bg="#f0f8f0", font=self.custom_font
+            self.main_frame, text="Nhập mã bí mật trên hộp quà ngoài đời:",
+            fg="#333", bg="#f0f8f0", font=self.custom_font
         ).pack(pady=20)
 
-        self.entry_final = tk.Entry(self.final_frame, font=self.custom_font, justify="center", width=25, bg="white", fg="black")
-        self.entry_final.pack(pady=10)
+        self.entry_gift = tk.Entry(self.main_frame, font=self.custom_font, justify="center", width=20, bd=2, relief="flat")
+        self.entry_gift.pack(pady=10, ipady=5)
 
-        self.btn_final = tk.Button(
-            self.final_frame, text="Nhận Quà Thật Sự", command=self.check_final_code,
-            bg="#FFB7C5", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2
-        )
-        self.btn_final.pack(pady=10)
+        tk.Button(
+            self.main_frame, text="Xác nhận mã", command=self.check_gift_key,
+            bg="#2d8659", fg="white", font=self.custom_font, relief="flat", padx=30, pady=10, cursor="hand2"
+        ).pack(pady=20)
 
-    def check_initial_challenge(self):
-        if self.entry_ans.get().strip() == INITIAL_CHALLENGE_ANSWER:
-            self.result_frame.pack(pady=10)
-            self.final_frame.pack(pady=10)
-            messagebox.showinfo("Thành công!", "Chính xác rồi! Hãy lưu lại Key và vào web nhé.")
+    def check_gift_key(self):
+        if self.entry_gift.get().strip().upper() == GIFTED_KEY:
+            self.show_challenge_gate()
         else:
-            messagebox.showerror("Sai rồi", "Gợi ý: Hãy nhớ lại một chút nhé!")
+            messagebox.showerror("Lỗi", "Mã hộp quà chưa đúng rùi, xem kỹ lại nhé!")
 
-    def open_web(self):
-        webbrowser.open(WEB_URL)
+    def show_challenge_gate(self):
+        self.clear_main_frame()
+        
+        tk.Label(
+            self.main_frame, text="Thử thách tiếp theo:\nNgày sinh nhật của t là ngày nào (dd/mm/yyyy)?",
+            fg="#333", bg="#f0f8f0", font=self.custom_font, justify="center"
+        ).pack(pady=20)
+
+        self.entry_birthday = tk.Entry(self.main_frame, font=self.custom_font, justify="center", width=20, bd=2, relief="flat")
+        self.entry_birthday.pack(pady=10, ipady=5)
+
+        tk.Button(
+            self.main_frame, text="Giải mã", command=self.check_birthday,
+            bg="#2d8659", fg="white", font=self.custom_font, relief="flat", padx=30, pady=10, cursor="hand2"
+        ).pack(pady=20)
+
+    def check_birthday(self):
+        if self.entry_birthday.get().strip() == INITIAL_CHALLENGE_ANSWER:
+            self.show_web_gate()
+        else:
+            messagebox.showerror("Lỗi", "Bro, m thực sự ko nhớ à 😭!")
+
+    def show_web_gate(self):
+        self.clear_main_frame()
+        
+        tk.Label(
+            self.main_frame, text=f"CHÍNH XÁC!\n\nKEY VÀO WEB LÀ:\n{SECRET_WEB_KEY}",
+            fg="#2d8659", bg="#f0f8f0", font=("Arial", 14, "bold"), justify="center"
+        ).pack(pady=20)
+
+        tk.Button(
+            self.main_frame, text="Mở Web Ngay!", command=lambda: webbrowser.open(WEB_URL),
+            bg="#2d8659", fg="white", font=self.custom_font, relief="flat", padx=30, pady=10
+        ).pack(pady=10)
+
+        tk.Label(
+            self.main_frame, text="----------------------------------\nSau khi thắng web, nhập Mã Bí Mật vào đây:",
+            fg="#666", bg="#f0f8f0", font=("Arial", 10)
+        ).pack(pady=20)
+
+        self.entry_final = tk.Entry(self.main_frame, font=self.custom_font, justify="center", width=20, bd=2, relief="flat")
+        self.entry_final.pack(pady=5, ipady=5)
+
+        tk.Button(
+            self.main_frame, text="Mở Quà Thật Sự", command=self.check_final_code,
+            bg="#FFB7C5", fg="#000", font=self.custom_font, relief="flat", padx=30, pady=10
+        ).pack(pady=15)
 
     def check_final_code(self):
-        if self.entry_final.get().strip() == FINAL_SECRET_CODE:
-            self.show_finale()
+        if self.entry_final.get().strip().upper() == FINAL_SECRET_CODE:
+            self.start_finale()
         else:
-            messagebox.showwarning("Sai Mã", "Mã này không đúng rồi, bạn đã thắng cả 4 game chưa?")
+            messagebox.showwarning("Lỗi", "Mã bí mật chưa đúng!")
 
-    def show_finale(self):
-        # Clear UI
-        for widget in self.root.winfo_children():
-            widget.destroy()
+    def start_finale(self):
+        self.header_label.destroy()
+        self.main_frame.destroy()
         
-        # Create canvas for confetti
-        self.canvas = tk.Canvas(self.root, width=600, height=700, bg="#f0f8f0", highlightthickness=0)
+        self.canvas = tk.Canvas(self.root, width=500, height=600, bg="#f0f8f0", highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
         
-        # Start confetti animation
-        threading.Thread(target=self.create_confetti, daemon=True).start()
-        
-        # Finale Screen
-        self.canvas.create_text(300, 100, text="HAPPY BIRTHDAY! 🎉", 
-                               fill="#000000", font=("Arial", 28, "bold"), tags="finale")
-
-        message = (
-            "Chúc mừng sinh nhật bạn! 🎉\n\n"
-            "Biết là hôm nay 5/4 rồi, quà đến hơi muộn nên đừng giận tui nhé.\n"
-            "Nãy giờ đùa Cá tháng Tư tí thôi, còn đây là những dòng thật lòng nhất:\n\n"
-            "Dù bây giờ mỗi đứa một lớp, không còn học chung như hồi năm lớp 5 nữa,\n"
-            "nhưng tui vẫn luôn trân trọng tình bạn này.\n\n"
-            "Món quà ngoài đời nhìn có vẻ đơn giản, thô sơ\n"
-            "(vì tui vụng về khoản gói ghém quá),\n"
-            "nhưng hy vọng chai sữa tắm với tẩy trang này\n"
-            "sẽ thay tui nhắc bạn chăm sóc bản thân thật tốt.\n\n"
-            "Tui không giỏi nói lời hoa mỹ,\n"
-            "chỉ biết dùng code để gửi tâm tư,\n"
-            "nhưng tình cảm dành cho bạn thì luôn là\n"
-            "'hàng thật giá thật'.\n\n"
-            "Tuổi mới lúc nào cũng rạng rỡ,\n"
-            "học siêu đỉnh và mãi xinh gái nhé! ❤️"
+        self.msg_label = tk.Label(
+            self.root, text="", fg="#1a4d33", bg="#f0f8f0",
+            font=("Arial", 12, "bold"), justify="center", wraplength=400
         )
+        self.msg_window = self.canvas.create_window(250, 250, window=self.msg_label)
         
-        # Hiển thị message theo từng dòng để không bị che
-        lines = message.split('\n')
-        y_pos = 180
-        for line in lines:
-            if line.strip():  # Chỉ hiển thị dòng không rỗng
-                self.canvas.create_text(300, y_pos, text=line.strip(), 
-                                       fill="#000000", font=("Arial", 12), tags="finale")
-                y_pos += 25
+        self.next_btn = tk.Button(
+            self.root, text="Xem tiếp ➔", command=self.next_scene,
+            bg="#2d8659", fg="white", font=self.custom_font, relief="flat", padx=20, pady=5
+        )
+        self.btn_window = self.canvas.create_window(250, 450, window=self.next_btn)
 
-        # Exit button
-        exit_btn = tk.Button(self.root, text="🎓 Mãi Là Bạn Tốt 🎓", command=self.root.quit,
-                           bg="#2d8659", fg="white", font=self.custom_font, relief="raised", padx=20, bd=2)
-        self.canvas.create_window(300, 600, window=exit_btn, tags="finale")
+        threading.Thread(target=self.create_confetti, daemon=True).start()
+        self.next_scene()
 
+    def next_scene(self):
+        if self.msg_index < len(MESSAGES):
+            self.msg_label.config(text=MESSAGES[self.msg_index])
+            self.msg_index += 1
+            if self.msg_index == len(MESSAGES):
+                self.next_btn.config(text="🎓 Mãi Mãi Là Best Friend 🎓", command=self.root.quit, bg="#FFB7C5", fg="#000")
+        
     def create_confetti(self):
-        colors = ["#98FF98", "#FFB7C5", "#2d8659", "#f0f8f0", "#e6b3cc"]
-        confetti_pieces = []
-        
-        for _ in range(100):
+        colors = ["#98FF98", "#FFB7C5", "#2d8659", "#ffd700", "#e6b3cc"]
+        pieces = []
+        for _ in range(60):
             x = random.randint(0, 500)
-            y = random.randint(-600, -50)
-            color = random.choice(colors)
-            size = random.randint(5, 15)
-            speed = random.uniform(2, 8)
-            drift = random.uniform(-2, 2)
+            y = random.randint(-500, 0)
+            c = random.choice(colors)
+            s = random.randint(6, 12)
             
-            piece = self.canvas.create_rectangle(x, y, x+size, y+size, fill=color, outline="")
-            confetti_pieces.append({'id': piece, 'x': x, 'y': y, 'speed': speed, 'drift': drift})
-        
-        # Animate confetti
-        for _ in range(200):
-            for piece in confetti_pieces:
-                self.canvas.move(piece['id'], piece['drift'], piece['speed'])
-                piece['y'] += piece['speed']
-                
-                # Reset if out of bounds
-                if piece['y'] > 700:
-                    self.canvas.coords(piece['id'], piece['x'], -50, 
-                                     piece['x'] + 10, -50 + 10)
-                    piece['y'] = -50
-            
-            self.canvas.tag_raise("finale")
+            # Vẽ hình trái tim chuẩn hơn thay vì dùng create_oval thông thường
+            p = self.draw_heart(x, y, s, c)
+            pieces.append({'id': p, 'speed': random.uniform(2, 5)})
+
+        while True:
+            for p in pieces:
+                self.canvas.move(p['id'], 0, p['speed'])
+                pos = self.canvas.coords(p['id'])
+                if len(pos) >= 2 and pos[1] > 600:
+                    self.canvas.move(p['id'], 0, -650)
+            self.canvas.tag_lower("all")
             self.root.update()
-            threading.Event().wait(0.05)
+            threading.Event().wait(0.04)
+
+    def draw_heart(self, x, y, size, color):
+        # Tọa độ đa giác để tạo hình trái tim cân đối
+        pts = [
+            x, y + size // 4,
+            x - size // 2, y - size // 2,
+            x - size, y + size // 4,
+            x, y + size,
+            x + size, y + size // 4,
+            x + size // 2, y - size // 2,
+            x, y + size // 4
+        ]
+        return self.canvas.create_polygon(pts, fill=color, outline="", smooth=True)
 
 if __name__ == "__main__":
     root = tk.Tk()
