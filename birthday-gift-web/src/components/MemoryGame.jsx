@@ -141,7 +141,7 @@ export default function MemoryGame({ onComplete }) {
               <p className="text-xl font-medium">Chuẩn bị sang màn tiếp theo nhé...</p>
             ) : (
               <div className="flex flex-col items-center">
-                <p className="text-xl mb-8 font-medium">Bạn đã tìm thấy tất cả mảnh ghép rồi!</p>
+                <p className="text-xl mb-8 font-medium">Chị đã tìm thấy tất cả mảnh ghép rồi!</p>
                 <button 
                   onClick={onComplete} 
                   className="bg-black text-mint-700 font-black px-10 py-4 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-lg"

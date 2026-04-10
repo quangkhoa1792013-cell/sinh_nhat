@@ -31,13 +31,13 @@ export default function MazeGame({ onComplete }) {
     // Check trap
     const hitTrap = TRAPS.find(t => t.r === nr && t.c === nc);
     if (hitTrap) {
-      setMessage("Ối! đạp trúng bẫy r! Quay lại vạch xuất phát thôi 😂");
+      setMessage("Ối! Đạp trúng bẫy rồi! Quay lại vạch xuất phát thôi chị ơi 😂");
       setPos({ r: 0, c: 0 });
       return;
     }
 
     setPos({ r: nr, c: nc });
-    setMessage("Cố lên, sắp đến đích r!");
+    setMessage("Cố lên, sắp đến đích rồi chị!");
 
     if (nr === MAZE_SIZE - 1 && nc === MAZE_SIZE - 1) {
       setIsWon(true);
@@ -94,7 +94,7 @@ export default function MazeGame({ onComplete }) {
                     className="absolute inset-0 z-10 bg-white/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center rounded-3xl">
           <Flag size={64} className="text-mint-500 mb-4" />
           <h2 className="text-2xl font-bold text-slate-800 mb-2">PHÁ ĐẢO MÊ CUNG!</h2>
-          <p className="text-slate-600 mb-6">Mấy cái bẫy kia ko lừa được m r.</p>
+          <p className="text-slate-600 mb-6">Mấy cái bẫy kia không lừa được chị rồi!</p>
           <button onClick={onComplete} className="btn-primary px-12 py-3">TIẾP TỤC</button>
         </motion.div>
       )}

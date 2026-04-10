@@ -35,7 +35,7 @@ export default function Gatekeeper({ onUnlock }) {
         </motion.div>
         
         <h1 className="text-4xl font-black mb-3 text-mint-800 tracking-tight">DỪNG LẠI! 🛡️</h1>
-        <p className="text-slate-500 mb-10 font-medium">Bạn cần Key từ "Người Gác Cổng" để đi tiếp hành trình.</p>
+        <p className="text-slate-500 mb-10 font-medium">Chị cần Key từ "Người Gác Cổng" để đi tiếp hành trình nhé.</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative">
@@ -63,7 +63,7 @@ export default function Gatekeeper({ onUnlock }) {
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
             className="mt-6 text-red-500 font-bold flex items-center justify-center gap-2"
           >
-            <span>❌ Key này "fake" rùi, xem lại app nhé!</span>
+            <span>❌ Key này sai rùi, xem lại app đi chị ơi!</span>
           </motion.p>
         )}
       </div>

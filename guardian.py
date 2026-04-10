@@ -6,23 +6,23 @@ import threading
 
 # Configuration
 WEB_URL = "https://sinh-nhat.pages.dev" 
-GIFTED_KEY = "KTLT-2013" 
+GIFTED_KEY = "CHUC-MUNG-SINH-NHAT" # Đổi mã cho dễ nhớ vì không có hộp quà thật
 INITIAL_CHALLENGE_ANSWER = "17/9/2013" 
 SECRET_WEB_KEY = "SANG-XIN-MIN-2026"
-FINAL_SECRET_CODE = "CAM-ON-DA-NHAN-QUA-:)"
+FINAL_SECRET_CODE = "CHI-NHI-MAI-DINH-MAI-DINH"
 
 MESSAGES = [
-    "Chúc mừng sinh nhật! 🎉\n\nBiết là hôm nay là 7/4 rồi, quà đến muộn mất 1 tuần nên đừng giận t nhé.\nNãy giờ đùa vui tí thôi, gọi là chơi giải trí tí, còn đây là những dòng thật lòng nhất t muốn dành cho m:",
-    "Dù bây giờ m không còn nghịch như xưa nữa mà đã trưởng thành hơn, đã xinh đẹp hơn, đã thêm 1 tuổi rồi \nnhưng t vẫn luôn trân trọng tình bạn này.\n\nMón quà ngoài đời nhìn có vẻ đơn giản, thô sơ\n(vì t không biết gói ghém quà :) ),",
-    "Nhưng t hy vọng 1 chai sữa tắm và 1 chai tẩy trang này\nsẽ thay t nhắc m chăm sóc bản thân thật tốt.\n\nt không giỏi nói lời hoa mỹ, chỉ biết dùng code để gửi tâm tư :),\nnhưng món quà t dành cho m thì luôn là 'hàng thật giá thật'.",
-    "T chúc m: Tuổi mới lúc nào cũng rạng rỡ,\nhọc siêu đỉnh và mãi xinh gái nhé! ❤️ (ok thì nhắn t :) )"
+    "Chúc mừng sinh nhật chị iu của em! 🎉\n\nChúc chị thêm tuổi mới thật nhiều niềm vui, lúc nào cũng xinh đẹp, rạng rỡ và thành công trong mọi dự định nhé!",
+    "Em không giỏi nói lời hoa mỹ, nên em đã tự tay code món quà công nghệ nhỏ này dành tặng chị (hy vọng chị không chê em 'múa rìu qua mắt thợ' :) ),",
+    "Tuy món quà chỉ là những dòng code khô khan, nhưng chứa đựng rất nhiều tình cảm của em dành cho chị. Với em, chị vẫn luôn là người chị tuyệt vời nhất!",
+    "Chúc chị tuổi mới luôn hạnh phúc, gặp nhiều may mắn và mãi là niềm tự hào của cả nhà mình nhé! ❤️"
 ]
 
 class BirthdayGuardian:
     def __init__(self, root):
         self.root = root
         self.root.title("Người Gác Cổng")
-        self.root.geometry("500x600")
+        self.root.geometry("1000x1000")
         self.root.resizable(False, False)
         self.root.configure(bg="#f0f8f0") 
         
@@ -54,11 +54,11 @@ class BirthdayGuardian:
         self.clear_main_frame()
         
         tk.Label(
-            self.main_frame, text="Nhập mã bí mật trên hộp quà ngoài đời:",
+            self.main_frame, text="Nhập mã kích hoạt món quà (Gợi ý: CHUC-MUNG-SINH-NHAT):",
             fg="#333", bg="#f0f8f0", font=self.custom_font
         ).pack(pady=20)
 
-        self.entry_gift = tk.Entry(self.main_frame, font=self.custom_font, justify="center", width=20, bd=2, relief="flat")
+        self.entry_gift = tk.Entry(self.main_frame, font=self.custom_font, justify="center", width=30, bd=2, relief="flat")
         self.entry_gift.pack(pady=10, ipady=5)
 
         tk.Button(
@@ -70,13 +70,13 @@ class BirthdayGuardian:
         if self.entry_gift.get().strip().upper() == GIFTED_KEY:
             self.show_challenge_gate()
         else:
-            messagebox.showerror("Lỗi", "Mã hộp quà chưa đúng rùi, xem kỹ lại nhé!")
+            messagebox.showerror("Lỗi", "Mã kích hoạt chưa đúng rùi, xem kỹ lại gợi ý nhé!")
 
     def show_challenge_gate(self):
         self.clear_main_frame()
         
         tk.Label(
-            self.main_frame, text="Thử thách tiếp theo:\nNgày sinh nhật của t là ngày nào (dd/mm/yyyy)?",
+            self.main_frame, text="Thử thách tiếp theo:\nNgày sinh nhật của em là ngày nào (dd/mm/yyyy)?",
             fg="#333", bg="#f0f8f0", font=self.custom_font, justify="center"
         ).pack(pady=20)
 
@@ -92,7 +92,7 @@ class BirthdayGuardian:
         if self.entry_birthday.get().strip() == INITIAL_CHALLENGE_ANSWER:
             self.show_web_gate()
         else:
-            messagebox.showerror("Lỗi", "Bro, m thực sự ko nhớ à 😭!")
+            messagebox.showerror("Lỗi", "Ơ, chị thực sự không nhớ ngày sinh nhật của em à 😭!")
 
     def show_web_gate(self):
         self.clear_main_frame()
@@ -103,12 +103,12 @@ class BirthdayGuardian:
         ).pack(pady=20)
 
         tk.Button(
-            self.main_frame, text="Mở Web Ngay!", command=lambda: webbrowser.open(WEB_URL),
+            self.main_frame, text="Mở Web Thử Thách!", command=lambda: webbrowser.open(WEB_URL),
             bg="#2d8659", fg="white", font=self.custom_font, relief="flat", padx=30, pady=10
         ).pack(pady=10)
 
         tk.Label(
-            self.main_frame, text="----------------------------------\nSau khi thắng web, nhập Mã Bí Mật vào đây:",
+            self.main_frame, text="----------------------------------\nSau khi chiến thắng trên web, nhập Mã Bí Mật vào đây:",
             fg="#666", bg="#f0f8f0", font=("Arial", 10)
         ).pack(pady=20)
 
@@ -116,7 +116,7 @@ class BirthdayGuardian:
         self.entry_final.pack(pady=5, ipady=5)
 
         tk.Button(
-            self.main_frame, text="Mở Quà Thật Sự", command=self.check_final_code,
+            self.main_frame, text="Xem Lời Chúc Bí Mật", command=self.check_final_code,
             bg="#FFB7C5", fg="#000", font=self.custom_font, relief="flat", padx=30, pady=10
         ).pack(pady=15)
 
@@ -153,7 +153,7 @@ class BirthdayGuardian:
             self.msg_label.config(text=MESSAGES[self.msg_index])
             self.msg_index += 1
             if self.msg_index == len(MESSAGES):
-                self.next_btn.config(text="🎓 Mãi Mãi Là Best Friend 🎓", command=self.root.quit, bg="#FFB7C5", fg="#000")
+                self.next_btn.config(text="❤️ Chúc Mừng Sinh Nhật Chị Iu ❤️", command=self.root.quit, bg="#FFB7C5", fg="#000")
         
     def create_confetti(self):
         colors = ["#98FF98", "#FFB7C5", "#2d8659", "#ffd700", "#e6b3cc"]

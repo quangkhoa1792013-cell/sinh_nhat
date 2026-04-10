@@ -4,18 +4,18 @@ import { HelpCircle, CheckCircle2, XCircle } from 'lucide-react';
 
 const QUESTIONS = [
   {
-    q: "Người tặng quà này hiện đang học lớp nào?",
-    options: ["7A1", "7A2", "7A3", "7A4"],
-    correct: 2
+    q: "Người tặng quà này là ai thế nhỉ?",
+    options: ["Em trai chị", "Người lạ mặt", "Bạn thân", "Anh trai"],
+    correct: 0
   },
   {
     q: "Món quà này được tặng vào dịp nào?",
-    options: ["Tết Trung Thu", "Sinh nhật", "Giáng sinh", "Ngày Quốc tế Phụ nữ"],
+    options: ["Tết Trung Thu", "Sinh nhật chị iu", "Giáng sinh", "Ngày Quốc tế Phụ nữ"],
     correct: 1
   },
   {
-    q: "Trong túi quà có gì nhỉ?",
-    options: ["Bánh kẹo", "Gấu bông", "Sữa tắm & Tẩy trang", "Sách vở"],
+    q: "Em đã dùng gì để tạo ra món quà này tặng chị?",
+    options: ["Mua ở cửa hàng", "Tự tay gói ghém", "Viết code bằng cả trái tim", "Nhờ người khác làm"],
     correct: 2
   }
 ];
@@ -93,7 +93,7 @@ export default function QuizGame({ onComplete }) {
               <CheckCircle2 size={48} />
             </div>
             <h2 className="text-2xl font-bold text-slate-800 mb-2">QUÁ ĐỈNH!</h2>
-            <p className="text-slate-600 mb-6">M nhớ mọi thứ về t luôn hả? Wow!</p>
+            <p className="text-slate-600 mb-6">Chị nhớ mọi thứ về em luôn hả? Wow!</p>
             <button onClick={onComplete} className="btn-secondary w-full py-3">
               TIẾP TỤC HÀNH TRÌNH
             </button>

@@ -123,7 +123,7 @@ export default function CatchGame({ onComplete }) {
             <Trophy size={75} className="text-yellow-500" />
           </div>
           <h2 className="text-5xl font-black mb-4 uppercase tracking-tighter">XUẤT SẮC!</h2>
-          <p className="text-xl mb-12 font-bold text-mint-50">Bạn đã hứng đủ {SCORE_GOAL} món đồ dưỡng da rồi!</p>
+          <p className="text-xl mb-12 font-bold text-mint-50">Chị đã hứng đủ {SCORE_GOAL} món đồ dưỡng da rồi!</p>
           <button 
             onClick={onComplete} 
             className="bg-black text-mint-800 font-black px-16 py-5 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all text-2xl uppercase"

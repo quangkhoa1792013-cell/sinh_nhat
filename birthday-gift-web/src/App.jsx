@@ -12,7 +12,7 @@ import MemoryGame from './components/MemoryGame';
 const GAMES = [
   { id: 'catch', title: "🧴 Săn Mỹ Phẩm", description: "Hứng 20 món quà rơi từ trên trời!", component: CatchGame },
   { id: 'quiz', title: "🤔 Ai Thủ Phạm?", description: "3 câu hỏi về người tặng quà.", component: QuizGame },
-  { id: 'maze', title: "🎭 Mê Cung 1/4", description: "Vượt qua các bẫy Cá tháng Tư.", component: MazeGame },
+  { id: 'maze', title: "🎭 Mê Cung Bí Mật", description: "Vượt qua các bẫy để về đích.", component: MazeGame },
   { id: 'memory', title: "📚 Mảnh Ghép", description: "Lật thẻ tìm cặp hình giống nhau.", component: MemoryGame },
 ];
 
@@ -64,7 +64,7 @@ export default function App() {
       className="max-w-4xl mx-auto p-6"
     >
       <h1 className="text-3xl md:text-4xl font-bold text-mint-700 text-center mb-10 drop-shadow-sm">
-        🎮 4 Thử Thách Bạn Bè 🎮
+        🎮 4 Thử Thách Cho Chị Iu 🎮
       </h1>
       
       <div className="grid md:grid-cols-2 gap-6">
@@ -133,22 +133,22 @@ export default function App() {
       className="max-w-md mx-auto p-10 bg-white/95 backdrop-blur-2xl rounded-[2rem] border-2 border-mint-100 text-center shadow-2xl"
     >
       <h1 className="text-5xl mb-6">🎊</h1>
-      <h2 className="text-3xl font-bold text-mint-800 mb-8">Chúc mừng bạn!</h2>
+      <h2 className="text-3xl font-bold text-mint-800 mb-8">Chúc mừng chị iu!</h2>
       
       <div className="bg-mint-50 p-6 rounded-2xl mb-8 border border-mint-100">
-        <p className="text-xs font-bold text-mint-500 mb-2 uppercase tracking-widest">Mã bí mật của bạn</p>
+        <p className="text-xs font-bold text-mint-500 mb-2 uppercase tracking-widest">Mã bí mật của chị</p>
         <p className="text-2xl md:text-3xl font-mono text-slate-800 font-bold select-all">
-          CAM-ON-DA-NHAN-QUA-:)
+          CHI-NHI-MAI-DINH-MAI-DINH
         </p>
       </div>
 
       <p className="text-slate-500 mb-8 text-sm font-medium leading-relaxed">
-        Lưu lại mã này và quay lại ứng dụng <b>Người Gác Cổng</b> để nhận món quà thật sự từ tui nhé! ❤️
+        Lưu lại mã này và quay lại ứng dụng <b>Người Gác Cổng</b> để nhận món quà từ em nhé! ❤️
       </p>
 
       <button 
         onClick={() => {
-          navigator.clipboard.writeText('QUA-MUON-NHUNG-CHAT');
+          navigator.clipboard.writeText('CHI-NHI-MAI-DINH-MAI-DINH');
           alert('Đã copy mã bí mật!');
         }}
         className="btn-secondary w-full py-3.5 text-lg font-bold rounded-xl"
